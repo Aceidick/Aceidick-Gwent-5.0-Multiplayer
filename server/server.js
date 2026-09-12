@@ -53,7 +53,7 @@ const server = http.createServer((req, res) => {
   if (req.url === "/health") {
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.writeHead(200);
-    res.end(JSON.stringify({ok:true, version:"1.4.2", clients:wss ? wss.clients.size : 0, rooms:rooms.size}));
+    res.end(JSON.stringify({ok:true, version:"1.4.3", clients:wss ? wss.clients.size : 0, rooms:rooms.size}));
     return;
   }
   if (req.method === "OPTIONS") {
@@ -299,7 +299,7 @@ wss.on("connection", (ws, req) => {
 				if (!peer)
 					return reject(ws, "no-peer");
 				const eventType = msg && msg.data && typeof msg.data.t === "string" ? msg.data.t : "data";
-				if (["lobby-ready", "lobby-unready", "lobby-start", "lobby-start-ack", "match-forfeit", "action", "turn-state", "popup-choice", "choice", "choice-end", "choice-commit", "rearrange-card", "rearrange-row", "rearrange-end", "ability-target", "power-card", "number-choice", "destination"].includes(eventType)) {
+				if (["lobby-ready", "lobby-unready", "lobby-start", "lobby-start-ack", "match-forfeit", "match-stop", "action", "turn-state", "popup-choice", "choice", "choice-end", "choice-commit", "rearrange-card", "rearrange-row", "rearrange-end", "ability-target", "power-card", "number-choice", "destination"].includes(eventType)) {
 					const detail = { code: ws.room, from: rooms.get(ws.room)?.host === ws ? "host" : "guest" };
 					if (eventType === "lobby-start" || eventType === "lobby-start-ack") {
 						detail.seed = msg.data.seed;
@@ -377,4 +377,4 @@ setInterval(() => {
 
 setInterval(() => { eventHits = new Map(); }, EVENT_WINDOW_MS);
 
-server.listen(PORT, HOST, () => log("server-start", { host: HOST, port: PORT, version: "1.4.2" }));
+server.listen(PORT, HOST, () => log("server-start", { host: HOST, port: PORT, version: "1.4.3" }));
