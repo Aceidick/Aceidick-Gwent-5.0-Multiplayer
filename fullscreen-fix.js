@@ -46,17 +46,49 @@
                 e.preventDefault();
             }
         }
-    });
+  
+  });
 
     // 4. Override the global openFullscreen function if it exists.
+    // Catch both synchronous throws AND async promise rejections so that
+    // callers using "await openFullscreen()" never receive a rejection.
     var _origOpenFullscreen = window.openFullscreen;
     if (typeof _origOpenFullscreen === "function") {
         window.openFullscreen = function() {
             try {
-                return _origOpenFullscreen.call(this);
+                var result = _origOpenFullscreen.call(this);
+                if (result && typeof result.then === "function") {
+                    return result.catch(function(e) {
+                        console.warn("[Gwent] openFullscreen promise rejected (non-fatal):", e.message || e);
+                    });
+                }
+                return result;
             } catch (e) {
                 console.warn("[Gwent] openFullscreen failed (non-fatal):", e.message || e);
             }
         };
     }
+    
+    // 5. Deferred re-wrap: if openFullscreen is defined later (e.g. by a
+    // script that loads after this fix), re-wrap it on DOMContentLoaded.
+    window.addEventListener("DOMContentLoaded", function() {
+        var orig = window.openFullscreen;
+        if (typeof orig === "function" && orig._gwentFsWrapped) return;
+        if (typeof orig === "function") {
+            window.openFullscreen = function() {
+                try {
+                    var result = orig.call(this);
+                    if (result && typeof result.then === "function") {
+                        return result.catch(function(e) {
+                            console.warn("[Gwent] openFullscreen promise rejected (non-fatal):", e.message || e);
+                        });
+                    }
+                    return result;
+                } catch (e) {
+                    console.warn("[Gwent] openFullscreen failed (non-fatal):", e.message || e);
+                }
+            };
+            window.openFullscreen._gwentFsWrapped = true;
+        }
+    });
 })();
