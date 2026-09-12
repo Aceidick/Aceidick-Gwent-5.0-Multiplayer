@@ -1,3 +1,9 @@
+# v1.4.3 — Audit af spillets valgforløb
+
+Se `docs/CHOICE_AUDIT_V1.4.3_DA.md`. Bevar serverens eksisterende `img`-mappe.
+
+---
+
 # v1.4.2 — Klikadgang på slutskærmen
 
 Se `docs/ENDSCREEN_FIX_V1.4.2_DA.md`. Bevar serverens eksisterende `img`-mappe.

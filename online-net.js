@@ -1,6 +1,6 @@
 "use strict";
 
-console.log("[Gwent Online] online-net.js loaded v1.4.2");
+console.log("[Gwent Online] online-net.js loaded v1.4.3");
 
 const OnlineNet = {
   DEFAULT_URL: null,

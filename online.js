@@ -1,6 +1,6 @@
 "use strict";
 
-console.log("[Gwent Online] online.js loaded v1.4.2-endscreen-input-fixed");
+console.log("[Gwent Online] online.js loaded v1.4.3-choice-audit");
 
 /*
  * Gwent Classic v5.0 online layer.
@@ -360,6 +360,11 @@ const GwentOnline = {
   route(m) {
     if (!m || typeof m.t !== "string") return;
     if (m.t.startsWith("lobby-")) return this.routeLobby(m);
+    if (m.t === 'match-stop') {
+      if (this.active && m.matchToken === this._matchToken)
+        this.desync('The other client stopped the match: ' + String(m.reason || 'synchronization error'), false);
+      return;
+    }
 
     // A forfeit is match-level control, not a turn action. It must be handled
     // immediately even when this client is blocked waiting in ControllerRemoteV5
@@ -1823,19 +1828,18 @@ const GwentOnline = {
       return oldViewContainer.call(this, container, action);
     };
     self._originalQueueCarousel = oldQueue;
-    UI.prototype.queueCarousel = async function(container, count, action, predicate, bSort, bQuit, title, bRedraw = false) {
+    UI.prototype.queueCarousel = async function(container, count, action, predicate, bSort, bQuit, title, bRedraw = false, localPreview = false) {
       if (!self.active) return oldQueue.call(this, container, count, action, predicate, bSort, bQuit, title, bRedraw);
-      // v1.3.9: ui.viewCard(leader, activateLeader) is only a local preview UI.
-      // The top-level `action:leader` already identifies the gameplay action;
-      // sending a second `turn:carousel:*` decision leaves stale choice packets
-      // that the remote peer has no matching carousel for.
-      const previewOnlyLeader = count === 1 && container?.cards?.length === 1 && container.cards[0]?.row === 'leader';
-      if (previewOnlyLeader) {
+      // Only the explicit viewCard entry point marks a local preview. Card
+      // contents cannot distinguish a preview from a one-candidate decision.
+      if (localPreview) {
         self.trace('decision:carousel-local-preview', {actor:self.localRole(), card:container.cards[0]?.key || null, err:'leader-preview'});
         return oldQueue.call(this, container, count, action, predicate, bSort, bQuit, title, bRedraw);
       }
       const chooser = self.decisionOwner();
       const decision = self.beginDecision('carousel', chooser);
+      self.trace('decision:carousel-open', {actor:decision.role,
+        err:decision.id + ':cards=' + (container?.cards?.length || 0) + ':redraw=' + !!bRedraw});
 
       if (self.isRemote(chooser)) {
         self.trace('decision:carousel-wait', {actor:decision.role, err:decision.id});
@@ -2156,11 +2160,16 @@ const GwentOnline = {
     return {path, local:a, remote:b};
   },
 
-  desync(reason) {
+  desync(reason, notifyPeer = true) {
     if (String(reason).includes('Online match closed')) return;
-    this.cancelBoardInteractions();
-    console.error("Online desync:", reason);
+    if (notifyPeer) {
+      try { this.send({t:'match-stop', matchToken:this._matchToken, reason:String(reason).slice(0,500)}); } catch (_) {}
+    }
     this.active = false;
+    if (typeof game !== 'undefined') game.over = true;
+    this.cancelBoardInteractions();
+    document.getElementsByTagName('main')[0]?.classList.add('noclick');
+    console.error("Online desync:", reason);
     alert("Online match desynchronized and was stopped.\n\n" + reason);
   },
   peerLeft() {

@@ -3454,7 +3454,7 @@ ofir_aamad_crown: {
 					await board.toGrave(drawnCards[i], tempContainerAI);
 				}
 			} else {
-				player.endTurnAfterAbilityUse = false;
+				
 				const tempContainer = new CardContainer();
 				drawnCards.forEach(c => {
 					c.currentLocation = tempContainer;
@@ -3471,8 +3471,8 @@ ofir_aamad_crown: {
 					for (let otherCard of otherCards) {
 						await board.toGrave(otherCard, container);
 					}
-					player.endTurnAfterAbilityUse = true;
-				}, () => true, false, true, "Choose a card to add to your hand (others will be discarded)");
+					
+				}, () => true, false, false, "Choose a card to add to your hand (others will be discarded)");
 			}
 		},
 		weight: (card, ai, max) => {
@@ -4225,7 +4225,7 @@ await card.animate("rune_call");
 				if (topCards.length === 0) return;
 				
 				topCards.forEach(c => {
-					c.currentLocation = tempContainer;
+					
 					tempContainer.cards.push(c);
 				});
 			} else {
@@ -4233,7 +4233,7 @@ await card.animate("rune_call");
 				if (enemyHandCards.length === 0) return;
 				
 				enemyHandCards.forEach(c => {
-					c.currentLocation = tempContainer;
+					
 					tempContainer.cards.push(c);
 				});
 			}
@@ -4242,11 +4242,11 @@ await card.animate("rune_call");
 				return;
 			}
 			
-			player.endTurnAfterAbilityUse = false;
+			
 			let titleText = choice === 0 ? "Clairvoyance: Top 3 cards of your deck (click to close)" : "Clairvoyance: 3 random cards of enemy hand (click to close)";
 			
 			await ui.queueCarousel(tempContainer, 1, async (container, index) => {
-				player.endTurnAfterAbilityUse = true;
+				
 			}, () => true, false, true, titleText);
 		}
 	},

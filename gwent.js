@@ -4678,7 +4678,9 @@ navigator.vibrate(50);
             lCard = card.name;
             let container = new CardContainer();
             container.cards.push(card);
-            await this.viewCardsInContainer(container, action);
+            // This API previews a card locally; gameplay carousels, including
+            // a choice between leaders, must keep their normal synchronization.
+            await this.queueCarousel(container, 1, action || (() => {}), () => true, false, true, undefined, false, true);
         }
     }
 

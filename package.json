@@ -1,6 +1,6 @@
 {
   "name": "gwent-classic-v5-online",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "private": true,
   "description": "Gwent Classic v5.0 with integrated single-port online multiplayer",
   "scripts": {
@@ -11,7 +11,8 @@
     "test:board": "node tests/e2e-board-decisions.js",
     "test:carousel": "node tests/e2e-carousel.js",
     "test:input": "node tests/e2e-turn-input.js",
-    "test:endscreen": "node tests/e2e-endscreen.js"
+    "test:endscreen": "node tests/e2e-endscreen.js",
+    "test:choices": "node tests/e2e-choice-audit.js"
   },
   "dependencies": {
     "ws": "^8.18.0"

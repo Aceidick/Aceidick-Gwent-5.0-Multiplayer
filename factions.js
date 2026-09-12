@@ -573,7 +573,7 @@ tocar("game_buy", false);
 			
 			if (weatherCards.length === 0) {
 				await ui.notification("ofir", 1200);
-				return; // No weather cards in deck
+				return false; // No weather cards in deck
 			}
 			
 			await ui.notification("ofir", 1200);
@@ -593,25 +593,14 @@ tocar("game_buy", false);
 					await bestCard.autoplay(player.deck);
 				}
 			} else {
-				// Player: Let them choose from weather cards
-				player.endTurnAfterAbilityUse = false;
-				await ui.queueCarousel(player.deck, 1, async (container, index) => {
-					const selectedCard = container.cards[index];
-					if (selectedCard && selectedCard.faction === "weather") {
-					
-						player.endTurnAfterAbilityUse = true;
-						
-						
-						await selectedCard.autoplay(player.deck);
-						
-						
-						if (typeof board !== "undefined" && board.updateScore) {
-							board.updateScore();
-						}
-					} else {
-						player.endTurnAfterAbilityUse = true;
-					}
-				}, c => c.faction === "weather", false, true, "Choose a weather card to play");
+                // Choosing/cancelling finishes before playing the card or ending
+                // the turn. An empty choice preserves the once-per-game use.
+                let selectedCard = null;
+                await ui.queueCarousel(player.deck, 1, (container, index) => {
+                    selectedCard = container.cards[index];
+                }, c => c.faction === "weather", false, true, "Choose a weather card to play");
+                if (!selectedCard) return false;
+                await selectedCard.autoplay(player.deck);
 			}
 		},
 		activeAbility: true,
