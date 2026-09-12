@@ -66,7 +66,7 @@
 		<div class = "abs" id = "very_start_bg1"></div>
 		<div class = "abs" id = "very_start_bg2">
 			<div id="game-container">
-                <div id="very_start">
+            <div id="very_start">
                 <span class="gwent-title">
                     <span class="letra-grande">G</span>WEN<span class="letra-grande">T</span>
                 </span>
@@ -117,7 +117,7 @@ v>
             <div id="arrangementWindow-counter">4</div>
             <div id="arrangementWindow-button" alt="End rearrangement">✓</div>
         </div>
-				<section id = "stats-me" class="stats">
+				<section id = "stats-me" class = "stats">
 					<div id="faction-ability-me" class="faction-ability">
 						<div id="faction-ability-count-me" class="faction-ability-count">0</div>
 					</div>
@@ -127,13 +127,13 @@ v>
 						</div>
 					</div>
 					<div id = "passed-me">Passed</div>
-					<div id = "hand-count-me" class="hand-count">5</div>
-					<div id="gem1-me" class="gem gem-on bg-contain"></div>
-					<div id="gem2-me" class="gem gem-on bg-contain"></div>
-					<div id = "name-me" class="name"></div>
-					<div id = "deck-name-me" class="deck-name"></div>
-					<div id = "score-total-me" class="score-total">
-						<div class="center">0</div>
+					<div id = "hand-count-me" class = "hand-count">5</div>
+					<div id = "gem1-me" class = "gem gem-on bg-contain"></div>
+					<div id = "gem2-me" class = "gem gem-on bg-contain"></div>
+					<div id = "name-me" class = "name"></div>
+					<div id = "deck-name-me" class = "deck-name"></div>
+					<div id = "score-total-me" class = "score-total">
+						<div class = "center">0</div>
 					</div>
 				</section>
 				<div id = "leader-me" class = "leader-box">
@@ -217,11 +217,11 @@ ck-op" class = "cardpile"></div>
 					<div class = "card-lg" onclick = "Carousel.curr.select(event)" id = "no_sound"></div>
 					<div class = "card-lg" onclick = "Carousel.curr.shift(event,1)"></div>
 					<div class = "card-lg" onclick = "Carousel.curr.shift(event,2)"></div>
-					</div>
+				</div>
 				<div class = "card-description">
-						<div></div>
-						<h1></h1>
-						<p></p>
+					<div></div>
+					<h1></h1>
+					<p></p>
 				</div>
 				<div id = "carousel_label"></div>
        			</section>
@@ -246,7 +246,7 @@ ck-op" class = "cardpile"></div>
 					<div>
 						<button class = "hover_un" onclick = "Popup.curr.selectYes()"></button>
 						<button class = "hover_un" onclick = "Popup.curr.selectNo()"></button>
-						</div>
+					</div>
 				</div>
 			</section>
       <section id = "number-popup" class = "center hide">
@@ -304,7 +304,7 @@ ck-op" class = "cardpile"></div>
 				<button>Replay</button>
 			</section>
 			<section id = "deck-selector"></section>
-	</main>
+		</main>
         <section id="deck-customization" style="display:none">
             <div id="faction-title" class="center">
                 <h1></h1>
@@ -404,6 +404,7 @@ ons.js?v=1.4.3"></script>
 		<script type="text/javascript" src="fullscreen-fix.js"></script>
 		<script type="text/javascript" src="online-net.js?v=1.4.3"></script>
 		<script type="text/javascript" src="online.js?v=1.4.3"></script>
+		<script type="text/javascript" src="faction-carousel-fix.js"></script>
 	
 <audio id="bgMusicLocal"></audio>
 
@@ -455,11 +456,11 @@ ons.js?v=1.4.3"></script>
 
     function iniciarAlTocar() {
         if (!audio.src || audio.src === "") { saltar(); }
-        window.removeEventListener('click', iniciarAlToca
-r");
+        window.removeEventListener('click', iniciarAlTocar);
         window.removeEventListener('touchstart', iniciarAlTocar);
     }
-    window.addEventListener('click', iniciarAlTocar);
+    window.addEventListener('click', iniciarAlToca
+r);
     window.addEventListener('touchstart', iniciarAlTocar);
  document.addEventListener("visibilitychange", function() {
         if (audio && audio.src && audio.src !== "") {
