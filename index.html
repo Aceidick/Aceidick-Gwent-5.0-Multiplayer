@@ -39,7 +39,8 @@
             font-size: 5.5rem;                 
             letter-spacing: -8px;             
             display: block;                  
-            text-align: center;              
+            text-align: center;             
+ 
         
       background: linear-gradient(to bottom, 
         #b58f00 0%,   
@@ -65,7 +66,7 @@
 		<div class = "abs" id = "very_start_bg1"></div>
 		<div class = "abs" id = "very_start_bg2">
 			<div id="game-container">
-            <div id="very_start">
+                <div id="very_start">
                 <span class="gwent-title">
                     <span class="letra-grande">G</span>WEN<span class="letra-grande">T</span>
                 </span>
@@ -92,7 +93,8 @@
 				<section id="stats-op" class="stats">
 					<div id="faction-ability-op" class="faction-ability">
 						<div id="faction-ability-count-op" class="faction-ability-count">0</div>
-					</div>
+					</di
+v>
 					<div class="profile-img">
 						<div>
 							<div></div>
@@ -115,7 +117,7 @@
             <div id="arrangementWindow-counter">4</div>
             <div id="arrangementWindow-button" alt="End rearrangement">✓</div>
         </div>
-				<section id = "stats-me" class = "stats">
+				<section id = "stats-me" class="stats">
 					<div id="faction-ability-me" class="faction-ability">
 						<div id="faction-ability-count-me" class="faction-ability-count">0</div>
 					</div>
@@ -125,13 +127,13 @@
 						</div>
 					</div>
 					<div id = "passed-me">Passed</div>
-					<div id = "hand-count-me" class = "hand-count">5</div>
-					<div id = "gem1-me" class = "gem gem-on bg-contain"></div>
-					<div id = "gem2-me" class = "gem gem-on bg-contain"></div>
-					<div id = "name-me" class = "name"></div>
-					<div id = "deck-name-me" class = "deck-name"></div>
-					<div id = "score-total-me" class = "score-total">
-						<div class = "center">0</div>
+					<div id = "hand-count-me" class="hand-count">5</div>
+					<div id="gem1-me" class="gem gem-on bg-contain"></div>
+					<div id="gem2-me" class="gem gem-on bg-contain"></div>
+					<div id = "name-me" class="name"></div>
+					<div id = "deck-name-me" class="deck-name"></div>
+					<div id = "score-total-me" class="score-total">
+						<div class="center">0</div>
 					</div>
 				</section>
 				<div id = "leader-me" class = "leader-box">
@@ -143,7 +145,8 @@
 				<div id = "pass-button" class = "center pulse">Pass</div>
 <div id = "giveup-button" class = "center pulse">Give up</div>
 			</section>
-			<section id = "panel-mid" class = "panel">
+			<section id = "panel-mid"
+ class = "panel">
 				<section id = "field-op" class = "field">
 					<div class = "field-row">
 						<div class = "row-score center">0</div>
@@ -193,7 +196,8 @@
 			</section>
 			<section id = "panel-right" class = "panel">
 				<div id = "grave-op" class = "cardpile"></div>
-				<div id = "deck-op" class = "cardpile"></div>
+				<div id = "de
+ck-op" class = "cardpile"></div>
 				<div id = "grave-me" class = "cardpile"></div>
 				<div id = "deck-me" class = "cardpile"></div>
 			</section>
@@ -213,11 +217,11 @@
 					<div class = "card-lg" onclick = "Carousel.curr.select(event)" id = "no_sound"></div>
 					<div class = "card-lg" onclick = "Carousel.curr.shift(event,1)"></div>
 					<div class = "card-lg" onclick = "Carousel.curr.shift(event,2)"></div>
-				</div>
+					</div>
 				<div class = "card-description">
-					<div></div>
-					<h1></h1>
-					<p></p>
+						<div></div>
+						<h1></h1>
+						<p></p>
 				</div>
 				<div id = "carousel_label"></div>
        			</section>
@@ -242,14 +246,15 @@
 					<div>
 						<button class = "hover_un" onclick = "Popup.curr.selectYes()"></button>
 						<button class = "hover_un" onclick = "Popup.curr.selectNo()"></button>
-					</div>
+						</div>
 				</div>
 			</section>
       <section id = "number-popup" class = "center hide">
 				<div>
 					<h3></h3>
 					<p></p>
-          <div>
+         
+ <div>
               <input type="number" id="number-popup-value" value="0" min="0" max="999" />
               <button class="hover_un" onclick="NumberValuePopup.curr.done()"></button>
           </div>
@@ -299,7 +304,7 @@
 				<button>Replay</button>
 			</section>
 			<section id = "deck-selector"></section>
-		</main>
+	</main>
         <section id="deck-customization" style="display:none">
             <div id="faction-title" class="center">
                 <h1></h1>
@@ -314,7 +319,8 @@
     <span id="vibration-status" style="color: #2ecc71; margin-left: 5px; font-weight: bold;">ON</span>
 </a>
 
-<a id="select-board" class="deck-options">Select Board</a>
+<a id="select-board" class="deck-options">Select Board
+</a>
 <div id="board-carousel" class="board-carousel" style="display:none;">
     <button id="prev-board" class="hover_un">◀</button>
     <div id="board-preview"></div>
@@ -358,7 +364,8 @@
                 <p>Number of Unit Cards</p>
                 <p>0</p>
                 <p>Special Cards</p>
-                <p>0/10</p>
+                <p>0/10
+</p>
                 <p>Total Unit Card Strength</p>
                 <p>0</p>
                 <p>Hero Cards</p>
@@ -391,8 +398,10 @@
 		<script type = "text/javascript" src = "cards.js?v=1.4.3"></script>
 		<script type = "text/javascript" src = "decks.js?v=1.4.3"></script>
 		<script type = "text/javascript" src = "abilities.js?v=1.4.3"></script>
-		<script type = "text/javascript" src = "factions.js?v=1.4.3"></script>
+		<script type = "text/javascript" src = "facti
+ons.js?v=1.4.3"></script>
 		<script type = "text/javascript" src = "gwent.js?v=1.4.3"></script>
+		<script type="text/javascript" src="fullscreen-fix.js"></script>
 		<script type="text/javascript" src="online-net.js?v=1.4.3"></script>
 		<script type="text/javascript" src="online.js?v=1.4.3"></script>
 	
@@ -446,7 +455,8 @@
 
     function iniciarAlTocar() {
         if (!audio.src || audio.src === "") { saltar(); }
-        window.removeEventListener('click', iniciarAlTocar);
+        window.removeEventListener('click', iniciarAlToca
+r");
         window.removeEventListener('touchstart', iniciarAlTocar);
     }
     window.addEventListener('click', iniciarAlTocar);
